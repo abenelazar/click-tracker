@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+  click-tracker-dash:
+    image: abenelazar/click-tracker-dash:latest
+    ports:
+      - "3000:3000"
+    container_name: click-tracker-dash
+  click-tracker-api:
+    image: abenelazar/click-tracker-api:latest
+    ports:
+      - "8080:8080"
+    links:
+      - "db:redis"
+    restart: 'always'
+
+    container_name: click-tracker-api
+  db:
+    image: sameersbn/redis:latest
