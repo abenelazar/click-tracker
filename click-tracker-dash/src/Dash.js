@@ -18,9 +18,8 @@ class Dash extends Component {
             Clicks
         </Title>
           <ResponsiveContainer width='100%' height={300} >
-            <BarChart width={800} height={300} data={this.props.elements}
-              style={{}} >
-              <XAxis dataKey="key" />
+            <BarChart width={800} height={300} data={this.props.elements}>
+                <XAxis dataKey="key" />
               <YAxis />
               <Tooltip />
               <Bar dataKey="count" fill="#82ca9d" />

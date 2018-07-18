@@ -9,11 +9,23 @@ services:
   click-tracker-api:
     image: abenelazar/click-tracker-api:latest
     ports:
-      - "8080:8080"
+      - "8722:8722"
+    depends_on:
+      - db
     links:
-      - "db:redis"
+      - "db"
     restart: 'always'
-
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/practicedocker
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     container_name: click-tracker-api
   db:
-    image: sameersbn/redis:latest
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./click-tracker-postgres:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password

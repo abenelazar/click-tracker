@@ -15,18 +15,19 @@ class App extends Component {
   };
 
   componentWillMount() {
-    axios.get('http://localhost:8080/api/report/elements')
+    axios.get('http://localhost:8722/api/report/elements')
       .then(res => this.setState({ elements: res.data }))
       .catch(err => this.setState({ err: err }))
-    axios.get('http://localhost:8080/api/report/ip_addresses')
+    axios.get('http://localhost:8722/api/report/ip_addresses')
       .then(res => this.setState({ ip_addresses: res.data }))
       .catch(err => this.setState({ err: err }))
-    axios.get('http://localhost:8080/api/report/links')
+    /*
+    axios.get('http://localhost:8722/api/report/links')
       .then(res => this.setState({ links: res.data }))
       .catch(err => this.setState({ err: err }))
-    axios.get('http://localhost:8080/api/report/user_agent')
+    axios.get('http://localhost:8722/api/report/user_agent')
       .then(res => this.setState({ user_agent: res.data }))
-      .catch(err => this.setState({ err: err }))
+      .catch(err => this.setState({ err: err }))*/
   }
 
   render() {
