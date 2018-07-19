@@ -14,6 +14,12 @@ class Chart extends Component {
           <Title>
             { this.props.title }
         </Title>
+        {
+          !this.props.data.length &&
+          <div className='chart-no-data-message fade-in'>
+            No data available for the specified range
+          </div>
+        }
           <ResponsiveContainer width='100%' height={300} >
             <BarChart width={800} height={300} data={this.props.data}>
                 <XAxis dataKey="key" />
@@ -25,6 +31,10 @@ class Chart extends Component {
         </Card>
     )
   }
+}
+
+Chart.defaultProps = {
+  data: [],
 }
 
 export default Chart;

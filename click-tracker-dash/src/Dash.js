@@ -37,32 +37,28 @@ class Dash extends Component {
   }
 
   onDatesChange = (startDate, endDate) => {
-    console.log(startDate.startDate.toDate().toISOString().slice(0, 10))
-    console.log(startDate.endDate && startDate.endDate.toDate().toISOString().slice(0, 10))
     this.setState(startDate, endDate);
     const start = (startDate && startDate.startDate) || (endDate && endDate.startDate);
     const end = (startDate && startDate.endDate) || (endDate && endDate.endDate);
-    if(start && end) {
+    if (start && end) {
       let _start = start.toDate().toISOString().slice(0, 10);
       let _end = end.toDate()
-      debugger;
       _end.setDate(_end.getDate() + 1)
-      debugger;
       _end = _end.toISOString().slice(0, 10);
       axios.get(`http://localhost:8722/api/report/elements/${_start}/${_end}`)
-      .then(res => this.setState({ elements: res.data }))
-      .catch(err => this.setState({ err: err }))
+        .then(res => this.setState({ elements: res.data }))
+        .catch(err => this.setState({ err: err }))
       axios.get(`http://localhost:8722/api/report/user_agent/${_start}/${_end}`)
-      .then(res => this.setState({ user_agent: res.data }))
-      .catch(err => this.setState({ err: err }))
-      axios.get(`http://localhost:8722/api/report/links/${_start}/${_end}`) 
-      .then(res => this.setState({ links: res.data }))
-      .catch(err => this.setState({ err: err }))
-      axios.get(`http://localhost:8722/api/report/ip_addresses/${_start}/${_end}`) 
-      .then(res => this.setState({ ip_addresses: res.data }))
-      .catch(err => this.setState({ err: err }))
-  
-    } 
+        .then(res => this.setState({ user_agent: res.data }))
+        .catch(err => this.setState({ err: err }))
+      axios.get(`http://localhost:8722/api/report/links/${_start}/${_end}`)
+        .then(res => this.setState({ links: res.data }))
+        .catch(err => this.setState({ err: err }))
+      axios.get(`http://localhost:8722/api/report/ip_addresses/${_start}/${_end}`)
+        .then(res => this.setState({ ip_addresses: res.data }))
+        .catch(err => this.setState({ err: err }))
+
+    }
 
   };
 
