@@ -68,7 +68,7 @@ class Dash extends Component {
       <React.Fragment>
         <Card>
           <Title>
-            Click Tracker
+            Click Tracker Dashboard
           </Title>
         </Card>
         {
