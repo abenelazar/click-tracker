@@ -12,3 +12,34 @@ body {
   text-align: center;
   margin-bottom: 1rem;
 }
+
+.date-picker-container {
+  position: sticky;
+  z-index: 1;
+  top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px;
+  margin: 1rem 2rem;
+}
+
+.DateRangePicker {
+  width: 308px;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 5px 3px rgba(0,0,0,0.22);
+}
+
+.DateRangePickerInput {
+  width: 100%
+}
+/*
+
+.CalendarDay__selected {
+  background-color: #2F3F4E !important;
+  border: 1px solid #2F3F4E !important;
+}
+
+.CalendarDay__selected_span {
+  background-color: #546475 !important;
+  border: 1px solid #546475 !important;
+}
+*/

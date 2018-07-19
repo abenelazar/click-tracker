@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import './chart.css'
-
 class Title extends Component {
 
   render() {

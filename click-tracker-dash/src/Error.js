@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Card from './Card'
+import Card from './Card';
 import Title from './Title';
-import './chart.css'
 
 class Error extends Component {
 
