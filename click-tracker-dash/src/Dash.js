@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar, Tooltip } from 'recharts';
 import axios from 'axios';
 import Card from './Card';
 import Title from './Title';
@@ -7,17 +6,20 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
 import Chart from './Chart';
+import Error from './Error';
 
 class Dash extends Component {
 
   state = {
     startDate: undefined,
     endDate: undefined,
-    element: [],
+    elements: [],
     ip_addresses: [],
     links: [],
-    today: new Date(),
     user_agent: [],
+    today: new Date(),
+    err: null,
+    loading: true,
   }
 
   componentDidMount() {
@@ -31,7 +33,7 @@ class Dash extends Component {
       .then(res => this.setState({ links: res.data }))
       .catch(err => this.setState({ err: err }))
     axios.get('http://localhost:8722/api/report/user_agent')
-      .then(res => this.setState({ user_agent: res.data }))
+      .then(res => this.setState({ user_agent: res.data, loading: false }))
       .catch(err => this.setState({ err: err }))
 
   }
@@ -47,17 +49,16 @@ class Dash extends Component {
       _end = _end.toISOString().slice(0, 10);
       axios.get(`http://localhost:8722/api/report/elements/${_start}/${_end}`)
         .then(res => this.setState({ elements: res.data }))
-        .catch(err => this.setState({ err: err }))
+        .catch(err => this.setState({ err }))
       axios.get(`http://localhost:8722/api/report/user_agent/${_start}/${_end}`)
         .then(res => this.setState({ user_agent: res.data }))
-        .catch(err => this.setState({ err: err }))
+        .catch(err => this.setState({ err }))
       axios.get(`http://localhost:8722/api/report/links/${_start}/${_end}`)
         .then(res => this.setState({ links: res.data }))
-        .catch(err => this.setState({ err: err }))
+        .catch(err => this.setState({ err }))
       axios.get(`http://localhost:8722/api/report/ip_addresses/${_start}/${_end}`)
         .then(res => this.setState({ ip_addresses: res.data }))
-        .catch(err => this.setState({ err: err }))
-
+        .catch(err => this.setState({ err }))
     }
 
   };
@@ -70,6 +71,10 @@ class Dash extends Component {
             Click Tracker
           </Title>
         </Card>
+        {
+          this.state.err && 
+          <Error err={this.state.err} />
+        }
         <div className='date-picker-container'>
           <DateRangePicker
             startDate={this.state.startDate}
@@ -85,18 +90,22 @@ class Dash extends Component {
         <Chart
           data={this.state.elements}
           title='Clicks'
+          loading={this.state.loading}
         />
         <Chart
           data={this.state.links}
           title='Links'
+          loading={this.state.loading}
         />
         <Chart
           data={this.state.user_agent}
           title='User Agent'
+          loading={this.state.loading}
         />
         <Chart
           data={this.state.ip_addresses}
           title='IP Adresses'
+          loading={this.state.loading}
         />
       </React.Fragment>
     )
