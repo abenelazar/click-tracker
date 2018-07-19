@@ -104,7 +104,7 @@ class Dash extends Component {
         />
         <Chart
           data={this.state.ip_addresses}
-          title='IP Adresses'
+          title='IP Addresses'
           loading={this.state.loading}
         />
       </React.Fragment>
