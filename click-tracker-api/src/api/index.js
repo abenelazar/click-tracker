@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import csv from 'express-csv';
 
 export default ({ config, db }) => {
 	let api = Router();
@@ -19,9 +20,9 @@ export default ({ config, db }) => {
 	});
 
 	api.get('/track/link/:name', (req, res) => {
+		console.log(res.headers)
 		const { ip, hostname } = req
 		const { name } = req.params;
-		console.log('sup')
 		const values = [ip, hostname, name, req.headers['user-agent']]
 		const query = 'INSERT INTO link_tracking(ip, host, link, user_agent, date) VALUES($1, $2, $3, $4, NOW())'
 		db.query(query, values, (err, data) => {
@@ -196,6 +197,27 @@ export default ({ config, db }) => {
 			}
 		});
 	});
+
+	api.get('/download', (_, res) => {
+		const query = `
+			SELECT *
+			FROM
+				(SELECT link as key, host, ip, user_agent, date FROM link_tracking
+				union
+				SELECT element as key, host, ip, user_agent, date FROM element_tracking
+				) _group
+		`
+		db.query(query, (err, data) => {
+			if (err) {
+			  console.log(err.stack)
+				res.status(500).send()
+			}else {
+				res.csv(data.rows, true);
+			}
+		});
+	});
+		
+	
 	
 	return api;
 }

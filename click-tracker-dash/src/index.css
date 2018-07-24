@@ -31,15 +31,16 @@ body {
 .DateRangePickerInput {
   width: 100%
 }
-/*
 
-.CalendarDay__selected {
-  background-color: #2F3F4E !important;
-  border: 1px solid #2F3F4E !important;
+.download-btn {
+  font-size: 38px;
+  text-transform: uppercase;
+  color: white;
+  background-color: unset;
+  border-color: unset;
+  border-width: 2px;
+  width: max-content;
+  align-self: center;
+  padding: 10px;
+  margin: 10px;
 }
-
-.CalendarDay__selected_span {
-  background-color: #546475 !important;
-  border: 1px solid #546475 !important;
-}
-*/

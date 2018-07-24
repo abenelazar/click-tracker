@@ -107,6 +107,12 @@ class Dash extends Component {
           title='IP Addresses'
           loading={this.state.loading}
         />
+        <Card>
+           <a download="tracking.csv"
+              href='/api/download' className='download-btn'>
+            Download DB
+          </a>
+        </Card>
       </React.Fragment>
     )
   }

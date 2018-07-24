@@ -1509,6 +1509,10 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   dependencies:
     homedir-polyfill "^1.0.1"
 
+express-csv@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/express-csv/-/express-csv-0.6.0.tgz#db792d85b262207e561d6362ba39a1e681e3d503"
+
 express-promise-router@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/express-promise-router/-/express-promise-router-3.0.3.tgz#5e6d22a5a3f013d71833172fe8d7ab780c3f6b70"
