@@ -19,8 +19,8 @@ class Chart extends Component {
         }
           <ResponsiveContainer width='100%' height={300} >
             <BarChart width={800} height={300} data={this.props.data}>
-                <XAxis dataKey="key" />
-              <YAxis />
+              <XAxis interval={0} dataKey="key" />
+              <YAxis interval={0} />
               <Tooltip />
               <Bar dataKey="count" fill="#82ca9d" />
             </BarChart>
