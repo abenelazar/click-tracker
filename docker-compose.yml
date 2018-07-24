@@ -5,6 +5,11 @@ services:
     image: abenelazar/click-tracker-dash:latest
     ports:
       - "3000:3000"
+    depends_on:
+      - click-tracker-api
+    links:
+      - "click-tracker-api"
+    restart: 'always'
     container_name: click-tracker-dash
   click-tracker-api:
     image: abenelazar/click-tracker-api:latest
@@ -16,7 +21,7 @@ services:
       - "db"
     restart: 'always'
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/practicedocker
+      DATABASE_URL: postgres://postgres:password@db:5432/
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     container_name: click-tracker-api
@@ -25,7 +30,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./click-tracker-postgres:/docker-entrypoint-initdb.d/
+      - ./click-tracker-postgres/:/docker-entrypoint-initdb.d/
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
