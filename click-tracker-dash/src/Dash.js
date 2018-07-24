@@ -23,16 +23,16 @@ class Dash extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8722/api/report/elements')
+    axios.get('/api/report/elements')
       .then(res => this.setState({ elements: res.data }))
       .catch(err => this.setState({ err: err }))
-    axios.get('http://localhost:8722/api/report/ip_addresses')
+    axios.get('/api/report/ip_addresses')
       .then(res => this.setState({ ip_addresses: res.data }))
       .catch(err => this.setState({ err: err }))
-    axios.get('http://localhost:8722/api/report/links')
+    axios.get('/api/report/links')
       .then(res => this.setState({ links: res.data }))
       .catch(err => this.setState({ err: err }))
-    axios.get('http://localhost:8722/api/report/user_agent')
+    axios.get('/api/report/user_agent')
       .then(res => this.setState({ user_agent: res.data, loading: false }))
       .catch(err => this.setState({ err: err }))
 
