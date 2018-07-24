@@ -7,6 +7,7 @@ import db from './db';
 import middleware from './middleware';
 import api from './api';
 import config from './config.json';
+import nocache from 'nocache'
 
 let app = express();
 app.server = http.createServer(app);
@@ -22,6 +23,8 @@ app.use(cors({
 app.use(bodyParser.json({
 	limit : config.bodyLimit
 }));
+
+app.use(nocache());
 
 app.use(middleware({ config, db }));
 
