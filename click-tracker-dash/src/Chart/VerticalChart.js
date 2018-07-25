@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar, Tooltip } from 'recharts';
 import Card from '../Card';
-import Title from '../Title';
 
 class VerticalChart extends Component {
 
   render() {
     return (
         <Card>
-          <Title>
-            { this.props.title }
-        </Title>
         {
           !this.props.data.length && !this.props.loading &&
           <div className='chart-no-data-message'>
