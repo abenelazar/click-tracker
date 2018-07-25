@@ -71,11 +71,8 @@ class Dash extends Component {
 
   render() {
     let dates;
-    debugger;
     if(this.state.startDate && this.state.endDate) {
-      debugger;
       dates = this.formatDates(this.state.startDate, this.state.endDate);
-      debugger;
     }
     return (
       <React.Fragment>

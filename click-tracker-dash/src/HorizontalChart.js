@@ -3,11 +3,11 @@ import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar, Tooltip } from 'recha
 import Card from './Card';
 import Title from './Title';
 
-class Chart extends Component {
+class HorizontalChart extends Component {
 
   render() {
     return (
-        <Card>
+        <Card className='horizontal-card'>
           <Title>
             { this.props.title }
         </Title>
@@ -17,8 +17,9 @@ class Chart extends Component {
             No data available for the specified range
           </div>
         }
-          <ResponsiveContainer width='100%' height={this.props.data.length*100} >
-            <BarChart layout={this.props.layout} data={this.props.data}>
+          <ResponsiveContainer width='90%' height={this.props.data.length*70} >
+
+            <BarChart layout='vertical' data={this.props.data}>
               <XAxis type='number' />
               <YAxis type='category' dataKey="key" />
               <Tooltip />
@@ -30,8 +31,8 @@ class Chart extends Component {
   }
 }
 
-Chart.defaultProps = {
+HorizontalChart.defaultProps = {
   data: [],
 }
 
-export default Chart;
+export default HorizontalChart;

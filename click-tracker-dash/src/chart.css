@@ -37,3 +37,12 @@ text {
   letter-spacing: 4px;
   font-size: 22px;
 }
+
+
+.horizontal-card {
+  padding-bottom: 30px;
+}
+
+.horizontal-card .recharts-surface {
+  padding-left: 110px;
+}
