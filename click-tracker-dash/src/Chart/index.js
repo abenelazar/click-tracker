@@ -12,7 +12,7 @@ class Chart extends Component {
   render() {
     return (
       <React.Fragment>
-        <div class='chart-header'>
+        <div className='chart-header'>
           <Title>
               { this.props.title }
           </Title>
