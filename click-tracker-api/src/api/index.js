@@ -11,9 +11,9 @@ export default ({ config, db }) => {
 		const query = 'INSERT INTO element_tracking(ip, host, element, user_agent, date) VALUES($1, $2, $3, $4, NOW())'
 		db.query(query, values, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
-			  res.status(500)
-			}else {
+				console.log(err.stack)
+				res.status(500)
+			} else {
 				res.send(data)
 			}
 		});
@@ -27,9 +27,9 @@ export default ({ config, db }) => {
 		const query = 'INSERT INTO link_tracking(ip, host, link, user_agent, date) VALUES($1, $2, $3, $4, NOW())'
 		db.query(query, values, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
-			  res.status(500)
-			}else {
+				console.log(err.stack)
+				res.status(500)
+			} else {
 				console.log(data)
 				res.send(data)
 			}
@@ -38,15 +38,15 @@ export default ({ config, db }) => {
 
 	api.get('/report/elements', (_, res) => {
 		const query = 'SELECT element as key, CAST(count(*) AS INTEGER) FROM element_tracking GROUP BY element ORDER BY element'
-		const values = 
-		db.query(query, values, (err, data) => {
-			if (err) {
-			  console.log(err.stack)
-			  res.status(500)
-			}else {
-				res.send(data.rows);
-			}
-		});
+		const values =
+			db.query(query, values, (err, data) => {
+				if (err) {
+					console.log(err.stack)
+					res.status(500)
+				} else {
+					res.send(data.rows);
+				}
+			});
 	});
 
 	api.get('/report/elements/:start/:stop', (req, res) => {
@@ -60,9 +60,9 @@ export default ({ config, db }) => {
 		const values = [req.params.start, req.params.stop];
 		db.query(query, values, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
-			  res.status(500)
-			}else {
+				console.log(err.stack)
+				res.status(500)
+			} else {
 				res.send(data.rows);
 			}
 		});
@@ -85,9 +85,9 @@ export default ({ config, db }) => {
 	`
 		db.query(query, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
-			  res.status(500)
-			}else {
+				console.log(err.stack)
+				res.status(500)
+			} else {
 				res.send(data.rows)
 			}
 		});
@@ -111,12 +111,12 @@ export default ({ config, db }) => {
 			GROUP BY user_agent
 			ORDER BY user_agent
 		`
-	const values = [req.params.start, req.params.stop];
-	db.query(query, values, (err, data) => {
+		const values = [req.params.start, req.params.stop];
+		db.query(query, values, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
-			  res.status(500)
-			}else {
+				console.log(err.stack)
+				res.status(500)
+			} else {
 				res.send(data.rows)
 			}
 		});
@@ -139,14 +139,14 @@ export default ({ config, db }) => {
 		`
 		db.query(query, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
+				console.log(err.stack)
 				res.status(500).send()
-			}else {
+			} else {
 				res.send(data.rows);
 			}
 		});
 	});
-		
+
 	api.get('/report/ip_addresses/:start/:stop', (req, res) => {
 		const query = `
 			SELECT ip as key, CAST(count(*) AS INTEGER)
@@ -158,9 +158,9 @@ export default ({ config, db }) => {
 		const values = [req.params.start, req.params.stop];
 		db.query(query, values, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
+				console.log(err.stack)
 				res.status(500).send()
-			}else {
+			} else {
 				res.send(data.rows);
 			}
 		});
@@ -170,15 +170,15 @@ export default ({ config, db }) => {
 		const query = 'SELECT link as key, CAST(count(*) AS INTEGER) FROM link_tracking GROUP BY link ORDER BY link'
 		db.query(query, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
+				console.log(err.stack)
 				res.status(500).send()
-			}else {
+			} else {
 				res.send(data.rows);
 			}
 		});
 	});
 
-	
+
 	api.get('/report/links/:start/:stop', (req, res) => {
 		const query = `
 			SELECT link as key, CAST(count(*) AS INTEGER)
@@ -190,9 +190,9 @@ export default ({ config, db }) => {
 		const values = [req.params.start, req.params.stop];
 		db.query(query, values, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
+				console.log(err.stack)
 				res.status(500).send()
-			}else {
+			} else {
 				res.send(data.rows);
 			}
 		});
@@ -209,15 +209,15 @@ export default ({ config, db }) => {
 		`
 		db.query(query, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
+				console.log(err.stack)
 				res.status(500).send()
-			}else {
+			} else {
 				res.csv(data.rows, true);
 			}
 		});
 	});
 
-		
+
 	api.get('/download/:start/:stop', (req, res) => {
 		const query = `
 			SELECT *
@@ -231,15 +231,15 @@ export default ({ config, db }) => {
 		const values = [req.params.start, req.params.stop];
 		db.query(query, values, (err, data) => {
 			if (err) {
-			  console.log(err.stack)
+				console.log(err.stack)
 				res.status(500).send()
-			}else {
-				res.send(data.rows);
+			} else {
+				res.csv(data.rows, true);
 			}
 		});
 	});
-		
-	
-	
+
+
+
 	return api;
 }
