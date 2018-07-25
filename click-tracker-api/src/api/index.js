@@ -216,6 +216,28 @@ export default ({ config, db }) => {
 			}
 		});
 	});
+
+		
+	api.get('/download/:start/:stop', (req, res) => {
+		const query = `
+			SELECT *
+			FROM
+				(SELECT link as key, host, ip, user_agent, date FROM link_tracking
+				union
+				SELECT element as key, host, ip, user_agent, date FROM element_tracking
+				) _group
+			WHERE DATE >= $1 AND DATE <= $2
+			`
+		const values = [req.params.start, req.params.stop];
+		db.query(query, values, (err, data) => {
+			if (err) {
+			  console.log(err.stack)
+				res.status(500).send()
+			}else {
+				res.send(data.rows);
+			}
+		});
+	});
 		
 	
 	

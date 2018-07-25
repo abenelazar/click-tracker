@@ -6,6 +6,7 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
 import Chart from './Chart';
+import HorizontalChart from './HorizontalChart';
 import Error from './Error';
 
 class Dash extends Component {
@@ -38,15 +39,20 @@ class Dash extends Component {
 
   }
 
+  formatDates = (start, end) => {
+    let _start = start.toDate().toISOString().slice(0, 10);
+    let _end = end.toDate()
+    _end.setDate(_end.getDate() + 1)
+    _end = _end.toISOString().slice(0, 10);
+    return { _start, _end };
+  }
+
   onDatesChange = (startDate, endDate) => {
     this.setState(startDate, endDate);
     const start = (startDate && startDate.startDate) || (endDate && endDate.startDate);
     const end = (startDate && startDate.endDate) || (endDate && endDate.endDate);
     if (start && end) {
-      let _start = start.toDate().toISOString().slice(0, 10);
-      let _end = end.toDate()
-      _end.setDate(_end.getDate() + 1)
-      _end = _end.toISOString().slice(0, 10);
+      const { _start, _end } = this.formatDates(start, end);
       axios.get(`/api/report/elements/${_start}/${_end}`)
         .then(res => this.setState({ elements: res.data }))
         .catch(err => this.setState({ err }))
@@ -64,6 +70,13 @@ class Dash extends Component {
   };
 
   render() {
+    let dates;
+    debugger;
+    if(this.state.startDate && this.state.endDate) {
+      debugger;
+      dates = this.formatDates(this.state.startDate, this.state.endDate);
+      debugger;
+    }
     return (
       <React.Fragment>
         <Card>
@@ -87,7 +100,7 @@ class Dash extends Component {
             onFocusChange={focusedInput => this.setState({ focusedInput })}
           />
         </div>
-        <Chart
+        <HorizontalChart
           data={this.state.elements}
           title='Clicks'
           loading={this.state.loading}
@@ -109,7 +122,7 @@ class Dash extends Component {
         />
         <Card>
            <a download="tracking.csv"
-              href='/api/download' className='download-btn'>
+              href={dates ? `/api/download/${dates._start}/${dates._end}` : '/api/download'} className='download-btn'>
             Download DB
           </a>
         </Card>

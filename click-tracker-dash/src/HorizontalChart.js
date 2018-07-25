@@ -17,10 +17,10 @@ class Chart extends Component {
             No data available for the specified range
           </div>
         }
-          <ResponsiveContainer width='100%' height={300} >
-            <BarChart width={800} height={300} data={this.props.data}>
-                <XAxis dataKey="key" />
-              <YAxis />
+          <ResponsiveContainer width='100%' height={this.props.data.length*100} >
+            <BarChart layout={this.props.layout} data={this.props.data}>
+              <XAxis type='number' />
+              <YAxis type='category' dataKey="key" />
               <Tooltip />
               <Bar dataKey="count" fill="#82ca9d" />
             </BarChart>
