@@ -5,10 +5,8 @@ import Title from './Title';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
-import Chart from './Chart';
-import HorizontalChart from './HorizontalChart';
+import Chart from './Chart/index';
 import Error from './Error';
-
 class Dash extends Component {
 
   state = {
@@ -97,12 +95,14 @@ class Dash extends Component {
             onFocusChange={focusedInput => this.setState({ focusedInput })}
           />
         </div>
-        <HorizontalChart
+        <Chart
+          horizontal
           data={this.state.elements}
           title='Clicks'
           loading={this.state.loading}
         />
         <Chart
+          horizontal
           data={this.state.links}
           title='Links'
           loading={this.state.loading}

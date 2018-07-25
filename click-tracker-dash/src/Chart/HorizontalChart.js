@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar, Tooltip } from 'recharts';
-import Card from './Card';
-import Title from './Title';
+import Card from '../Card';
+import Title from '../Title';
 
-class Chart extends Component {
+class HorizontalChart extends Component {
 
   render() {
     return (
-        <Card>
+        <Card className='horizontal-card'>
           <Title>
             { this.props.title }
         </Title>
@@ -17,10 +17,11 @@ class Chart extends Component {
             No data available for the specified range
           </div>
         }
-          <ResponsiveContainer width='100%' height={300} >
-            <BarChart width={800} height={300} data={this.props.data}>
-                <XAxis dataKey="key" />
-              <YAxis />
+          <ResponsiveContainer width='90%' height={this.props.data.length*70} >
+
+            <BarChart layout='vertical' data={this.props.data}>
+              <XAxis type='number' />
+              <YAxis type='category' dataKey="key" />
               <Tooltip />
               <Bar dataKey="count" fill="#82ca9d" />
             </BarChart>
@@ -30,8 +31,8 @@ class Chart extends Component {
   }
 }
 
-Chart.defaultProps = {
+HorizontalChart.defaultProps = {
   data: [],
 }
 
-export default Chart;
+export default HorizontalChart;

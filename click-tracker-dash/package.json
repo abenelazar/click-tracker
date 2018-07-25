@@ -20,7 +20,7 @@
   },
   "proxy": {
     "/api/*": {
-      "target": "http://click-tracker-api:8722",
+      "target": "http://localhost:8722",
       "changeOrigin": true
     }
   }
